@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://futbol-xi.github.io/futbol-xi/sitemap.xml

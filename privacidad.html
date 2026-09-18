@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fútbol XI · Política de privacidad</title>
+<meta name="description" content="Política de privacidad de Fútbol XI: qué datos se recogen, uso de cookies y publicidad, y tus derechos.">
+<link rel="canonical" href="https://futbol-xi.github.io/futbol-xi/privacidad.html">
+<style>
+  html{ color-scheme: light dark; }
+  :root{
+    --bg:#F7F5EF; --surface:#FFFFFF; --ink:#12201A; --ink-2:#52605A; --muted:#8B958E;
+    --line:#E3DFD2; --accent:#1E7A4C; --accent-2:#C98A1F; --accent-soft:#E7F1EB;
+    --accent2-soft:#FBF1DE; --shadow: 0 1px 2px rgba(18,32,26,.06), 0 8px 24px rgba(18,32,26,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0C1310; --surface:#121B16; --ink:#ECE8DD; --ink-2:#A8AFA6; --muted:#7E8C82;
+      --line:#223028; --accent:#34A567; --accent-2:#B8811F; --accent-soft:#16261D;
+      --accent2-soft:#241D0F; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0C1310; --surface:#121B16; --ink:#ECE8DD; --ink-2:#A8AFA6; --muted:#7E8C82;
+    --line:#223028; --accent:#34A567; --accent-2:#B8811F; --accent-soft:#16261D;
+    --accent2-soft:#241D0F; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing:border-box; }
+  body{
+    background:var(--bg); color:var(--ink); margin:0;
+    font-family:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding-inline:0;
+  }
+  .wrap{ max-width:760px; margin-inline:auto; padding-inline:20px; }
+
+  h1,h2,h3{ font-family:"Fraunces", Georgia, serif; text-wrap:balance; margin:0; }
+
+  header.top{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar{ max-width:760px; margin-inline:auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .brand{ display:flex; align-items:baseline; gap:8px; }
+  .brand a{ text-decoration:none; }
+  .brand .mark{ font-family:"Fraunces", serif; font-weight:600; font-size:1.15rem; letter-spacing:.01em; color:var(--ink); }
+  .brand .mark em{ font-style:normal; color:var(--accent); }
+  nav.links{ display:flex; gap:18px; font-size:.9rem; }
+  nav.links a{ color:var(--ink-2); text-decoration:none; }
+  nav.links a:hover{ color:var(--ink); }
+
+  .hero{ padding-block:44px 8px; }
+  .eyebrow{ font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:10px; }
+  .hero h1{ font-size:clamp(1.7rem, 4.5vw, 2.3rem); line-height:1.12; font-weight:600; }
+
+  section.legal{ padding-block:26px; border-top:1px solid var(--line); }
+  section.legal h2{ font-size:1.2rem; font-weight:600; margin-bottom:10px; }
+  section.legal p{ color:var(--ink-2); line-height:1.65; margin:0 0 12px; max-width:64ch; }
+  section.legal ul{ color:var(--ink-2); line-height:1.65; max-width:64ch; padding-left:20px; margin:0 0 12px; }
+  section.legal a{ color:var(--accent); }
+  section.legal strong{ color:var(--ink); }
+
+  footer{ padding-block:32px 48px; border-top:1px solid var(--line); margin-top:8px; }
+  footer .disclaimer{ font-size:.8rem; color:var(--muted); line-height:1.6; max-width:62ch; }
+  footer .sources{ margin-top:16px; font-size:.78rem; color:var(--muted); }
+  footer .sources a{ color:var(--ink-2); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+</head>
+<body>
+
+<header class="top">
+  <div class="topbar">
+    <div class="brand"><a href="index.html"><span class="mark">Fútbol <em>XI</em></span></a></div>
+    <nav class="links">
+      <a href="jornada-7.html">Última jornada</a>
+      <a href="index.html#sobre">Sobre</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Legal</div>
+    <h1>Política de privacidad</h1>
+  </section>
+
+  <section class="legal">
+    <h2>Quién es el responsable</h2>
+    <p>Fútbol XI es un proyecto editorial personal e independiente, sin personalidad jurídica propia, dedicado al análisis de datos de LaLiga y a contenido de fantasy fútbol. No forma parte de ninguna casa de apuestas ni recibe pagos de operadores de juego.</p>
+  </section>
+
+  <section class="legal">
+    <h2>Qué datos se recogen hoy</h2>
+    <p>Esta web está alojada en <strong>GitHub Pages</strong>. Como cualquier servicio de hosting, GitHub puede registrar datos técnicos básicos de cada visita (dirección IP, tipo de navegador, páginas vistas) con fines de funcionamiento y seguridad del servicio. Ese tratamiento lo realiza GitHub como proveedor de hosting, conforme a su propia <a href="https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">política de privacidad</a>. Fútbol XI, por su parte, no tiene formularios, registro de usuarios ni base de datos propia: no recogemos ni almacenamos datos personales de quienes visitan la web.</p>
+  </section>
+
+  <section class="legal">
+    <h2>Cookies y publicidad</h2>
+    <p>Actualmente Fútbol XI <strong>no utiliza cookies propias ni de terceros</strong>. Si en el futuro se incorporan anuncios (por ejemplo, Google AdSense) o herramientas de medición de audiencia (por ejemplo, Google Analytics), esos servicios podrán instalar cookies para mostrar publicidad y medir el tráfico, y en ese momento se pedirá el consentimiento correspondiente mediante un aviso de cookies y se actualizará esta página con el detalle de cada cookie, su finalidad y cómo rechazarla. Google, como tercero, aplica sus propias políticas de privacidad y protección de datos.</p>
+  </section>
+
+  <section class="legal">
+    <h2>Tus derechos</h2>
+    <p>De acuerdo con el Reglamento General de Protección de Datos (RGPD) y la normativa española aplicable, si en algún momento Fútbol XI llegase a tratar datos personales (por ejemplo, a través de un futuro formulario de contacto o newsletter), podrás ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad sobre esos datos. Esta página se actualizará con los canales de contacto correspondientes si esos servicios se activan.</p>
+  </section>
+
+  <section class="legal">
+    <h2>Contenido y menores de edad</h2>
+    <p>El contenido de análisis de apuestas de esta web está dirigido exclusivamente a personas mayores de 18 años y tiene carácter informativo: explica el razonamiento estadístico detrás de un pronóstico, pero no promociona, enlaza ni recomienda ninguna casa de apuestas concreta. Si el juego deja de ser un ocio para ti, existen recursos de ayuda y autoexclusión a través de los operadores autorizados por la Dirección General de Ordenación del Juego (DGOJ).</p>
+  </section>
+
+  <section class="legal">
+    <h2>Cambios en esta política</h2>
+    <p>Esta política de privacidad puede actualizarse para reflejar cambios en el funcionamiento de la web (por ejemplo, al activar publicidad o analítica). La fecha de la última actualización figura al pie de esta página.</p>
+    <p style="margin-top:18px; font-size:.85rem;">Última actualización: 18 de septiembre de 2026.</p>
+  </section>
+
+  <footer id="sobre">
+    <p class="disclaimer"><strong>Sobre esta web:</strong> análisis basado en datos públicos (forma, córners, goles, bajas) para explicar el razonamiento detrás de cada lectura — contenido informativo, no promociona ni enlaza casas de apuestas. Si el juego deja de ser un ocio para ti, Bet365 y otros operadores ofrecen límites de depósito y autoexclusión.</p>
+    <p class="disclaimer" style="margin-top:10px">+18. Juega con cabeza.</p>
+    <div class="sources">Fútbol XI — análisis y fantasy de LaLiga, actualizado jornada a jornada.</div>
+  </footer>
+</div>
+</body>
+</html>
