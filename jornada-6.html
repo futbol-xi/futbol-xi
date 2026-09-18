@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fútbol XI · Jornada 6</title>
+<meta name="description" content="Análisis de datos y consejos de fantasy para LaLiga, jornada a jornada.">
+<style>
+  html{ color-scheme: light dark; }
+  :root{
+    --bg:#F7F5EF; --surface:#FFFFFF; --ink:#12201A; --ink-2:#52605A; --muted:#8B958E;
+    --line:#E3DFD2; --accent:#1E7A4C; --accent-2:#C98A1F; --accent-soft:#E7F1EB;
+    --accent2-soft:#FBF1DE; --shadow: 0 1px 2px rgba(18,32,26,.06), 0 8px 24px rgba(18,32,26,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0C1310; --surface:#121B16; --ink:#ECE8DD; --ink-2:#A8AFA6; --muted:#7E8C82;
+      --line:#223028; --accent:#34A567; --accent-2:#B8811F; --accent-soft:#16261D;
+      --accent2-soft:#241D0F; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0C1310; --surface:#121B16; --ink:#ECE8DD; --ink-2:#A8AFA6; --muted:#7E8C82;
+    --line:#223028; --accent:#34A567; --accent-2:#B8811F; --accent-soft:#16261D;
+    --accent2-soft:#241D0F; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing:border-box; }
+  body{
+    background:var(--bg); color:var(--ink); margin:0;
+    font-family:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding-inline:0;
+  }
+  .wrap{ max-width:760px; margin-inline:auto; padding-inline:20px; }
+
+  h1,h2,h3{ font-family:"Fraunces", Georgia, serif; text-wrap:balance; margin:0; }
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums; }
+
+  header.top{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar{ max-width:760px; margin-inline:auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .brand{ display:flex; align-items:baseline; gap:8px; }
+  .brand a{ text-decoration:none; }
+  .brand .mark{ font-family:"Fraunces", serif; font-weight:600; font-size:1.15rem; letter-spacing:.01em; color:var(--ink); }
+  .brand .mark em{ font-style:normal; color:var(--accent); }
+  nav.links{ display:flex; gap:18px; font-size:.9rem; }
+  nav.links a{ color:var(--ink-2); text-decoration:none; }
+  nav.links a:hover{ color:var(--ink); }
+
+  .jornada-tabs{ display:flex; gap:8px; margin-top:20px; flex-wrap:wrap; }
+  .jtab{ border:1px solid var(--line); border-radius:100px; padding:6px 16px; font-size:.85rem; color:var(--ink-2); text-decoration:none; background:var(--surface); }
+  .jtab:hover{ border-color:var(--accent); color:var(--ink); }
+  .jtab.active{ background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+
+  .hero{ padding-block:44px 28px; }
+  .eyebrow{ font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:10px; }
+  .hero h1{ font-size:clamp(1.9rem, 5vw, 2.7rem); line-height:1.08; font-weight:600; }
+  .hero p.lede{ color:var(--ink-2); font-size:1.05rem; line-height:1.55; max-width:56ch; margin-top:14px; }
+
+  .matchday-strip{ display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+  .chip{ border:1px solid var(--line); border-radius:100px; padding:6px 14px; font-size:.82rem; color:var(--ink-2); background:var(--surface); }
+
+  section.match{ padding-block:36px; border-top:1px solid var(--line); }
+  .fixture{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px; box-shadow:var(--shadow); flex-wrap:wrap;
+  }
+  .fixture .team{ font-family:"Fraunces", serif; font-weight:600; font-size:1.25rem; flex:1; min-width:120px; }
+  .fixture .team.away{ text-align:right; }
+  .fixture .vs{ text-align:center; min-width:90px; }
+  .fixture .vs .kickoff{ font-size:.78rem; color:var(--muted); margin-top:2px; }
+  .fixture .vs .x{ font-family:"Fraunces", serif; color:var(--muted); font-size:1.1rem; }
+
+  .meta-line{ color:var(--muted); font-size:.85rem; margin-top:10px; }
+
+  h2.match-title{ font-size:1.5rem; font-weight:600; margin-top:22px; }
+  p.dek{ color:var(--ink-2); line-height:1.6; margin-top:8px; max-width:62ch; }
+
+  .stat-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:10px; margin-top:20px; }
+  .stat-tile{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .stat-tile .label{ font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+  .stat-tile .value{ font-family:"IBM Plex Mono", monospace; font-variant-numeric:tabular-nums; font-size:1.5rem; font-weight:600; margin-top:4px; }
+  .stat-tile .sub{ font-size:.8rem; color:var(--ink-2); margin-top:2px; }
+
+  .compare{ margin-top:22px; }
+  .compare h3{ font-size:1rem; font-weight:600; margin-bottom:12px; }
+  .bar-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; font-size:.88rem; }
+  .bar-row .who{ width:96px; flex-shrink:0; color:var(--ink-2); }
+  .bar-row .track{ flex:1; height:10px; background:var(--line); border-radius:6px; overflow:hidden; }
+  .bar-row .fill{ height:100%; border-radius:6px; }
+  .bar-row.home .fill{ background:var(--accent); }
+  .bar-row.away .fill{ background:var(--accent-2); }
+  .bar-row .num{ width:34px; text-align:right; font-family:"IBM Plex Mono", monospace; font-variant-numeric:tabular-nums; color:var(--ink); }
+
+  .pick-card{
+    margin-top:22px; background:var(--accent-soft); border:1px solid var(--line);
+    border-radius:12px; padding:16px 18px;
+  }
+  .pick-card .tag{ font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); font-weight:700; }
+  .pick-card p{ margin:8px 0 0; line-height:1.55; color:var(--ink); font-size:.94rem; }
+  .pick-card .odds{ font-family:"IBM Plex Mono", monospace; font-weight:600; }
+
+  .lineup-note{ margin-top:16px; font-size:.9rem; color:var(--ink-2); border-left:2px solid var(--line); padding-left:12px; }
+  .lineup-note b{ color:var(--ink); }
+
+  section.fantasy{ padding-block:36px; border-top:1px solid var(--line); }
+  .tip-list{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+  .tip{ display:flex; gap:14px; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .tip .who{ font-family:"Fraunces", serif; font-weight:600; min-width:150px; }
+  .tip .why{ color:var(--ink-2); font-size:.9rem; line-height:1.5; }
+  .tip .badge{ font-size:.7rem; background:var(--accent2-soft); color:var(--accent-2); border-radius:6px; padding:2px 8px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; flex-shrink:0; }
+
+  footer{ padding-block:32px 48px; border-top:1px solid var(--line); margin-top:8px; }
+  footer .disclaimer{ font-size:.8rem; color:var(--muted); line-height:1.6; max-width:62ch; }
+  footer .disclaimer strong{ color:var(--ink-2); }
+  footer .sources{ margin-top:16px; font-size:.78rem; color:var(--muted); }
+  footer .sources a{ color:var(--ink-2); }
+
+  @media (max-width:480px){
+    .fixture{ flex-direction:column; align-items:stretch; text-align:center; }
+    .fixture .team.away{ text-align:center; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+</head>
+<body>
+
+<header class="top">
+  <div class="topbar">
+    <div class="brand"><a href="index.html"><span class="mark">Fútbol <em>XI</em></span></a></div>
+    <nav class="links">
+      <a href="#analisis">Análisis</a>
+      <a href="#fantasy">Fantasy</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Jornada 6 · LaLiga</div>
+    <h1>El dato detrás del pronóstico, no solo el pronóstico.</h1>
+    <p class="lede">Previas de partidos con córners, goles, bajas y alineaciones probables explicadas — y consejos de fantasy (Comunio / Biwenger) con el mismo razonamiento detrás de cada pick.</p>
+    <div class="matchday-strip">
+      <span class="chip">Jue 17 sep · 19:00 · Betis–Getafe</span>
+      <span class="chip">Jue 17 sep · 21:30 · Málaga–Villarreal</span>
+    </div>
+    <nav class="jornada-tabs">
+      <a class="jtab" href="index.html">Inicio</a>
+      <a class="jtab" href="jornada-7.html">Jornada 7</a>
+      <a class="jtab active" href="jornada-6.html">Jornada 6</a>
+    </nav>
+  </section>
+
+  <section class="match" id="analisis">
+    <div class="eyebrow">Análisis de partido</div>
+    <div class="fixture">
+      <div class="team home">Real Betis</div>
+      <div class="vs"><div class="x">vs</div><div class="kickoff">Jue 17 sep · 19:00<br>Benito Villamarín</div></div>
+      <div class="team away">Getafe</div>
+    </div>
+
+    <h2 class="match-title">Un Betis sólido recibe a un Getafe que no marca fuera</h2>
+    <p class="dek">El Betis llega 3º en LaLiga con 12 de 15 puntos posibles y cinco victorias seguidas en casa; el Getafe es 15º y no ha ganado ni marcado como visitante esta temporada. La duda: Cucho Hernández sigue de baja por molestias y no entra en el once probable.</p>
+
+    <div class="stat-grid">
+      <div class="stat-tile"><div class="label">Forma Betis</div><div class="value">12/15</div><div class="sub">pts. últimos 5</div></div>
+      <div class="stat-tile"><div class="label">Forma Getafe</div><div class="value">5/15</div><div class="sub">pts. últimos 5</div></div>
+      <div class="stat-tile"><div class="label">Betis porterías a 0</div><div class="value">3/5</div><div class="sub">partidos de liga</div></div>
+      <div class="stat-tile"><div class="label">Getafe goles fuera</div><div class="value">0</div><div class="sub">en toda la temporada</div></div>
+    </div>
+
+    <div class="compare">
+      <h3>Córners totales de media (por partido)</h3>
+      <div class="bar-row home"><div class="who">Betis</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="num mono">11.8</div></div>
+      <div class="bar-row away"><div class="who">Getafe</div><div class="track"><div class="fill" style="width:75%"></div></div><div class="num mono">8.8</div></div>
+    </div>
+
+    <div class="lineup-note">
+      <b>Once probable Betis (4-2-3-1):</b> Valles; Ortiz, Bartra, Gómez, Junior; Bernal, Ceballos; Antony, Deossa, Fornals; Parrott.<br><br>
+      <b>Once probable Getafe (4-5-1):</b> Soria; Djené, Gudelj, Romero, Mojica; Satriano, Martín, Mangala, Terrats, Azón; Ünal.
+    </div>
+
+    <div class="pick-card">
+      <div class="tag">Lectura del dato</div>
+      <p>Combinación con más respaldo estadístico: <b>Betis gana y no encaja</b> — a <span class="odds">2.37</span>, apoyado en las 3 porterías a cero de 5 partidos y el 0 goles fuera del Getafe. El BTTS "No" por separado tiene además su propio respaldo: 9 partidos seguidos del Getafe sin marcar como no favorito.</p>
+    </div>
+  </section>
+
+  <section class="match">
+    <div class="fixture">
+      <div class="team home">Málaga</div>
+      <div class="vs"><div class="x">vs</div><div class="kickoff">Jue 17 sep · 21:30<br>La Rosaleda</div></div>
+      <div class="team away">Villarreal</div>
+    </div>
+
+    <h2 class="match-title">Dos equipos tocados, con el empate como hilo conductor</h2>
+    <p class="dek">El Málaga es el equipo menos goleador de LaLiga (2 goles en 5 partidos) pero está invicto en casa; el Villarreal encadena 4 derrotas seguidas y ha encajado 13 goles en 6 partidos — el peor arranque de su historia en Primera. Históricamente, el cruce está clavado: 32 enfrentamientos, 11 victorias para cada uno y 10 empates.</p>
+
+    <div class="stat-grid">
+      <div class="stat-tile"><div class="label">Málaga en casa</div><div class="value">Invicto</div><div class="sub">0 derrotas</div></div>
+      <div class="stat-tile"><div class="label">Villarreal forma</div><div class="value">0-2-3</div><div class="sub">V-E-D últimos 5</div></div>
+      <div class="stat-tile"><div class="label">H2H empates</div><div class="value">10/32</div><div class="sub">enfrentamientos históricos</div></div>
+      <div class="stat-tile"><div class="label">Villarreal encajados</div><div class="value">13</div><div class="sub">en 6 partidos</div></div>
+    </div>
+
+    <div class="compare">
+      <h3>Córners totales de media (por partido)</h3>
+      <div class="bar-row home"><div class="who">Málaga</div><div class="track"><div class="fill" style="width:86%"></div></div><div class="num mono">9.8</div></div>
+      <div class="bar-row away"><div class="who">Villarreal</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="num mono">11.4</div></div>
+    </div>
+
+    <div class="pick-card">
+      <div class="tag">Lectura del dato</div>
+      <p>La cuota de <b>empate a 3.75</b> implica un 26.7% de probabilidad, por debajo del 31% histórico del cruce (10 de 32) y de la racha reciente del Málaga en casa. Ahí está el margen. Como pick individual también destaca <b>Nicolás Pépé, más de 3 tiros</b> — promedia 3.1 por partido.</p>
+    </div>
+  </section>
+
+  <section class="fantasy" id="fantasy">
+    <div class="eyebrow">Fantasy · Comunio / Biwenger</div>
+    <h2 class="match-title">Picks de la jornada</h2>
+    <p class="dek">Jugadores en buen momento de forma para la jornada, con el motivo detrás de cada uno.</p>
+
+    <div class="tip-list">
+      <div class="tip"><span class="badge">Capitán</span><div><div class="who">Abdessamad Ezzalzouli</div><div class="why">3 goles esta temporada, titular fijo en un Betis que llega en su mejor racha.</div></div></div>
+      <div class="tip"><span class="badge">Fichaje</span><div><div class="who">Antony</div><div class="why">Recuperado de sus molestias, 4+ remates en 5 de sus últimos 5 partidos.</div></div></div>
+      <div class="tip"><span class="badge">Vigilar</span><div><div class="who">Martín Satriano</div><div class="why">3 goles esta temporada con el Getafe, referencia ofensiva pese a la mala racha del equipo.</div></div></div>
+      <div class="tip"><span class="badge">Banquear</span><div><div class="who">Georges Mikautadze</div><div class="why">El Villarreal no gana desde hace 5 jornadas y solo suma 2 goles del equipo en ese tramo.</div></div></div>
+    </div>
+  </section>
+
+  <footer id="sobre">
+    <p class="disclaimer"><strong>Sobre esta web:</strong> análisis basado en datos públicos (forma, córners, goles, bajas) para explicar el razonamiento detrás de cada lectura — contenido informativo, no promociona ni enlaza casas de apuestas. Si el juego deja de ser un ocio para ti, Bet365 y otros operadores ofrecen límites de depósito y autoexclusión.</p>
+    <p class="disclaimer" style="margin-top:10px">+18. Juega con cabeza.</p>
+    <div class="sources">Datos de la jornada del 17 de septiembre de 2026, recopilados de fuentes públicas de estadísticas de LaLiga.</div>
+  </footer>
+</div>
+</body>
+</html>
