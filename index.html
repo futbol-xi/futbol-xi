@@ -56,10 +56,30 @@
   .jtab:hover{ border-color:var(--accent); color:var(--ink); }
   .jtab.active{ background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
 
-  .hero{ padding-block:44px 28px; }
+  .hero{ padding-block:44px 8px; }
   .eyebrow{ font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:10px; }
   .hero h1{ font-size:clamp(1.9rem, 5vw, 2.7rem); line-height:1.08; font-weight:600; }
-  .hero p.lede{ color:var(--ink-2); font-size:1.05rem; line-height:1.55; max-width:56ch; margin-top:14px; }
+  .hero p.lede{ color:var(--ink-2); font-size:1.05rem; line-height:1.55; max-width:58ch; margin-top:14px; }
+
+  section.why{ padding-block:32px; border-top:1px solid var(--line); }
+  .feature-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:12px; margin-top:20px; }
+  .feature-tile{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  .feature-tile .fnum{ font-family:"IBM Plex Mono", monospace; font-size:.78rem; color:var(--accent); font-weight:600; }
+  .feature-tile h3{ font-size:1rem; margin-top:10px; font-weight:600; }
+  .feature-tile p{ color:var(--ink-2); font-size:.87rem; margin-top:6px; line-height:1.5; }
+
+  section.featured{ padding-block:32px; border-top:1px solid var(--line); }
+  .featured-card{ background:var(--accent-soft); border:1px solid var(--line); border-radius:16px; padding:26px 24px; margin-top:20px; }
+  .featured-card .flabel{ font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700; }
+  .featured-card h3{ font-size:1.4rem; margin-top:10px; font-weight:600; }
+  .featured-card p.dek{ color:var(--ink-2); font-size:.95rem; line-height:1.6; margin-top:10px; max-width:58ch; }
+  .featured-stats{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:10px; margin-top:18px; }
+  .fstat{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  .fstat .label{ font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+  .fstat .value{ font-family:"IBM Plex Mono", monospace; font-variant-numeric:tabular-nums; font-size:1.3rem; font-weight:600; margin-top:4px; }
+  .fstat .sub{ font-size:.78rem; color:var(--ink-2); margin-top:2px; }
+  .cta-btn{ display:inline-block; margin-top:20px; background:var(--accent); color:#fff !important; text-decoration:none; padding:11px 20px; border-radius:100px; font-weight:600; font-size:.9rem; }
+  .cta-btn:hover{ opacity:.92; }
 
   section.jornadas{ padding-block:36px; border-top:1px solid var(--line); }
 
@@ -102,12 +122,48 @@
   <section class="hero">
     <div class="eyebrow">LaLiga 2026/27</div>
     <h1>El dato detrás del pronóstico, no solo el pronóstico.</h1>
-    <p class="lede">Previas de partidos con córners, goles, bajas y alineaciones probables explicadas — y consejos de fantasy (Comunio / Biwenger) con el mismo razonamiento detrás de cada pick, jornada a jornada.</p>
+    <p class="lede">Fútbol XI cruza forma, córners, bajas y alineaciones probables con los picks de fantasy (Comunio / Biwenger) y el pick de apuestas con más valor de cada jornada — siempre con el razonamiento completo detrás, no solo el resultado.</p>
     <nav class="jornada-tabs">
       <a class="jtab active" href="index.html">Inicio</a>
       <a class="jtab" href="jornada-7.html">Jornada 7</a>
       <a class="jtab" href="jornada-6.html">Jornada 6</a>
     </nav>
+  </section>
+
+  <section class="why">
+    <div class="eyebrow">Por qué Fútbol XI</div>
+    <div class="feature-grid">
+      <div class="feature-tile">
+        <div class="fnum">01</div>
+        <h3>Datos, no corazonadas</h3>
+        <p>Forma reciente, córners, goles y bajas explicados partido a partido — el porqué detrás de cada previa.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="fnum">02</div>
+        <h3>Fantasy y apuestas, juntos</h3>
+        <p>Picks de Comunio / Biwenger y el pick de apuestas de la jornada en un mismo sitio, con la misma lógica detrás.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="fnum">03</div>
+        <h3>Un pick de valor por jornada</h3>
+        <p>Comparamos la probabilidad implícita de la cuota con el dato real para encontrar dónde está el margen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="eyebrow">Destacado · Jornada 7</div>
+    <div class="featured-card">
+      <div class="flabel">Análisis en portada</div>
+      <h3>Espanyol – Elche: el pick con más valor de la jornada</h3>
+      <p class="dek">El colista visita el RCDE Stadium sin conocer todavía la victoria, frente a un Espanyol que apoya casi todo su ataque en un solo hombre. Ahí aparece el margen de la jornada.</p>
+      <div class="featured-stats">
+        <div class="fstat"><div class="label">Roberto Fernández</div><div class="value">6 goles</div><div class="sub">de los 9 del Espanyol</div></div>
+        <div class="fstat"><div class="label">Elche encajados</div><div class="value">16</div><div class="sub">peor defensa de LaLiga</div></div>
+        <div class="fstat"><div class="label">Pick de valor</div><div class="value mono">2.65</div><div class="sub">gol de Roberto Fernández</div></div>
+      </div>
+      <a class="cta-btn" href="jornada-7.html">Ver el análisis completo →</a>
+    </div>
   </section>
 
   <section class="jornadas">
