@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fútbol XI · Atlético de Madrid - Real Madrid (Jornada 7)</title>
-<meta name="description" content="Análisis de Atlético de Madrid - Real Madrid (Jornada 7 LaLiga 2026/27): forma, córners, bajas, alineaciones probables y el pick de apuestas con más valor de este partido.">
-<link rel="canonical" href="https://futbol-xi.github.io/futbol-xi/jornada-7-atletico-real-madrid.html">
+<title>Fútbol XI · Metodología</title>
+<meta name="description" content="Cómo se elabora cada previa de Fútbol XI: fuentes de datos, cómo se calcula el pick de mayor valor y por qué existe un historial de aciertos público.">
+<link rel="canonical" href="https://futbol-xi.github.io/futbol-xi/metodologia.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fútbol XI">
 <meta property="og:locale" content="es_ES">
-<meta property="og:title" content="Atlético de Madrid - Real Madrid: análisis y pick de valor (Jornada 7 LaLiga)">
-<meta property="og:description" content="Análisis de Atlético de Madrid - Real Madrid (Jornada 7 LaLiga 2026/27): forma, córners, bajas, alineaciones probables y el pick de apuestas con más valor de este partido.">
-<meta property="og:url" content="https://futbol-xi.github.io/futbol-xi/jornada-7-atletico-real-madrid.html">
+<meta property="og:title" content="Metodología de Fútbol XI: así elegimos el pick de mayor valor de cada partido">
+<meta property="og:description" content="Cómo se elabora cada previa de Fútbol XI: fuentes de datos, cómo se calcula el pick de mayor valor y por qué existe un historial de aciertos público.">
+<meta property="og:url" content="https://futbol-xi.github.io/futbol-xi/metodologia.html">
 <meta property="og:image" content="https://futbol-xi.github.io/futbol-xi/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Atlético de Madrid - Real Madrid: análisis y pick de valor (Jornada 7 LaLiga)">
-<meta name="twitter:description" content="Análisis de Atlético de Madrid - Real Madrid (Jornada 7 LaLiga 2026/27): forma, córners, bajas, alineaciones probables y el pick de apuestas con más valor de este partido.">
+<meta name="twitter:title" content="Metodología de Fútbol XI: así elegimos el pick de mayor valor de cada partido">
+<meta name="twitter:description" content="Cómo se elabora cada previa de Fútbol XI: fuentes de datos, cómo se calcula el pick de mayor valor y por qué existe un historial de aciertos público.">
 <meta name="twitter:image" content="https://futbol-xi.github.io/futbol-xi/assets/og-image.png">
 <style>
   html{ color-scheme: light dark; }
@@ -75,8 +75,6 @@
 
   .matchday-strip{ display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
   .chip{ border:1px solid var(--line); border-radius:100px; padding:6px 14px; font-size:.82rem; color:var(--ink-2); background:var(--surface); }
-  .chip a{ color:inherit; text-decoration:none; }
-  .chip a:hover{ color:var(--ink); }
 
   section.match{ padding-block:36px; border-top:1px solid var(--line); }
   .fixture{
@@ -140,20 +138,26 @@
     .fixture .team.away{ text-align:center; }
   }
 
-  .jornada-list{ display:flex; flex-direction:column; gap:14px; margin-top:20px; }
-  .jornada-card{ display:block; text-decoration:none; color:inherit; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 20px; box-shadow:var(--shadow); transition:border-color .15s ease; }
-  .jornada-card:hover{ border-color:var(--accent); }
-  .jc-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
-  .jc-label{ font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700; }
-  .jc-badge{ font-size:.68rem; background:var(--accent2-soft); color:var(--accent-2); border-radius:6px; padding:3px 9px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
-  .jornada-card h3{ font-size:1.15rem; margin-top:8px; font-weight:600; }
-  .jornada-card p{ color:var(--ink-2); font-size:.9rem; margin-top:6px; line-height:1.5; }
-  .jc-meta{ color:var(--muted); font-size:.8rem; margin-top:10px; }
-  .match-pager{ display:flex; justify-content:space-between; gap:12px; margin-top:28px; flex-wrap:wrap; }
-  .match-pager a{ font-size:.85rem; color:var(--ink-2); text-decoration:none; border:1px solid var(--line); border-radius:100px; padding:8px 16px; background:var(--surface); }
-  .match-pager a:hover{ border-color:var(--accent); color:var(--ink); }
-  .back-link{ display:inline-block; margin-top:20px; font-size:.88rem; color:var(--accent); text-decoration:none; }
-  .back-link:hover{ text-decoration:underline; }
+  .prose{ margin-top:18px; }
+  .prose h2{ font-size:1.25rem; font-weight:600; margin-top:30px; }
+  .prose h2:first-child{ margin-top:0; }
+  .prose p{ color:var(--ink-2); line-height:1.65; margin-top:10px; max-width:64ch; }
+  .prose ul{ margin-top:10px; padding-left:20px; color:var(--ink-2); line-height:1.65; max-width:64ch; }
+  .prose li{ margin-top:4px; }
+
+  .track-summary{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:10px; margin-top:22px; }
+  .track-summary .stat-tile .value{ font-family:"IBM Plex Mono", monospace; font-variant-numeric:tabular-nums; font-size:1.5rem; font-weight:600; margin-top:4px; }
+  .track-summary .stat-tile .label{ font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+  .track-summary .stat-tile .sub{ font-size:.8rem; color:var(--ink-2); margin-top:2px; }
+  .track-summary .stat-tile{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+
+  .jornada-block{ margin-top:34px; padding-top:26px; border-top:1px solid var(--line); }
+  .jornada-block h2{ font-size:1.15rem; font-weight:600; }
+  .pick-row{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-top:14px; }
+  .pick-row .pr-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+  .pick-row .pr-match{ font-family:"Fraunces", serif; font-weight:600; font-size:1.02rem; }
+  .pick-row .pr-pick{ color:var(--ink-2); font-size:.92rem; margin-top:8px; line-height:1.5; }
+  .pick-row .pr-result{ font-size:.85rem; color:var(--muted); margin-top:8px; font-family:"IBM Plex Mono", monospace; }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -164,10 +168,8 @@
   <div class="topbar">
     <div class="brand"><a href="index.html"><span class="mark">Fútbol <em>XI</em></span></a></div>
     <nav class="links">
+      <a href="index.html">Inicio</a>
       <a href="jornada-7.html">Jornada 7</a>
-      <a href="jornada-7.html#fantasy">Fantasy</a>
-      <a href="index.html#sobre">Sobre</a>
-    
       <a href="historial.html">Historial</a>
       <a href="metodologia.html">Metodología</a>
     </nav>
@@ -176,67 +178,34 @@
 
 <div class="wrap">
   <section class="hero">
-    <div class="eyebrow">Jornada 7 · LaLiga</div>
-    <h1>Atlético de Madrid – Real Madrid</h1>
-    <p class="lede">Análisis con datos: forma reciente, córners, bajas, alineaciones probables y el pick de apuestas con más valor de este partido.</p>
-    <div class="matchday-strip">
-      <span class="chip">Dom 20 sep · 16:15 · Riyadh Air Metropolitano</span>
-    </div>
-    <nav class="jornada-tabs">
-      <a class="jtab" href="index.html">Inicio</a>
-      <a class="jtab active" href="jornada-7.html">Jornada 7</a>
-      <a class="jtab" href="jornada-6.html">Jornada 6</a>
-    </nav>
+    <div class="eyebrow">Cómo trabajamos</div>
+    <h1>Metodología</h1>
+    <p class="lede">Qué hay detrás de cada previa: de dónde salen los datos, cómo elegimos el pick de mayor valor y qué limitaciones tiene el método.</p>
   </section>
-  <section class="match" id="analisis">
-<div class="eyebrow" id="atletico-real-madrid">Análisis de partido</div>
-    <div class="fixture">
-      <div class="team home">Atlético de Madrid</div>
-      <div class="vs"><div class="x">vs</div><div class="kickoff">Dom 20 sep · 16:15<br>Riyadh Air Metropolitano</div></div>
-      <div class="team away">Real Madrid</div>
-    </div>
 
-    <h2 class="match-title">El derbi madrileño llega con Militão, Rodrygo y Mendy fuera y las nueves rojiblancas en duda</h2>
-    <p class="dek">El Real Madrid es 2º con 15 puntos (5V-0E-1D) y llega de ganar 3-2 al Elche; el Atlético es 4º con 13 puntos tras golear 4-0 a Osasuna. Mourinho pierde a Militão, Rodrygo y Mendy; Simeone tiene en duda a Julián Álvarez y Sørloth, con Pablo Barrios confirmado baja.</p>
+  <section class="jornada-block" style="border-top:none; margin-top:0; padding-top:0">
+    <div class="prose">
+      <h2>Quién hace esto</h2>
+      <p>Fútbol XI es un proyecto independiente hecho por una sola persona aficionada al fútbol y al análisis de datos, sin ninguna afiliación a casas de apuestas ni a clubes. No hay redacción detrás, ni interés en promocionar ningún operador — el contenido es informativo.</p>
 
-    <div class="stat-grid">
-      <div class="stat-tile"><div class="label">Atlético</div><div class="value">13 pts</div><div class="sub">4º · 4V-1E-1D</div></div>
-      <div class="stat-tile"><div class="label">Real Madrid</div><div class="value">15 pts</div><div class="sub">2º · 5V-0E-1D</div></div>
-      <div class="stat-tile"><div class="label">Mbappé</div><div class="value">7 goles</div><div class="sub">máximo goleador del Madrid</div></div>
-      <div class="stat-tile"><div class="label">Real Madrid córners</div><div class="value">7.8</div><div class="sub">por partido, top de LaLiga</div></div>
-    </div>
+      <h2>De dónde salen los datos</h2>
+      <p>Cada previa parte de estadísticas públicas de LaLiga: forma reciente (puntos de los últimos partidos), goles a favor y en contra, córners de media, bajas confirmadas y alineaciones probables. Cuando no hay una cifra exacta disponible para algún dato secundario (por ejemplo, algún promedio de córners), se indica como estimación razonada a partir del contexto — nunca se inventa un dato para que la previa "cuadre".</p>
 
-    <div class="compare">
-      <h3>Córners a favor de media (por partido)</h3>
-      <div class="bar-row home"><div class="who">Atlético</div><div class="track"><div class="fill" style="width:68%"></div></div><div class="num mono">5.3</div></div>
-      <div class="bar-row away"><div class="who">R. Madrid</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="num mono">7.8</div></div>
-    </div>
+      <h2>Cómo elegimos el pick de mayor valor</h2>
+      <p>El "pick de valor" de cada partido no es simplemente "quién va a ganar". Se calcula comparando la probabilidad implícita de una cuota (lo que el mercado está pagando) con una estimación propia de la probabilidad real, basándose en la forma, el historial de enfrentamientos y las bajas. Cuando la probabilidad estimada es claramente superior a la implícita por la cuota, ahí está el margen — y eso es lo que se destaca como pick.</p>
 
-    <div class="lineup-note">
-      <b>Once probable Atlético (5-2-3, Simeone):</b> Oblak; Giuliano, Pubill, Romero, Hancko, Grimaldo; Llorente, Koke; Lookman, Jonathan David, Baena.<br><br>
-      <b>Once probable Real Madrid (4-3-3, Mourinho):</b> Courtois; Dumfries, Huijsen, Rüdiger, Cucurella; Valverde, Tchouaméni, Bellingham; Güler, Mbappé, Vinicius.
-    </div>
+      <h2>Transparencia y límites del método</h2>
+      <p>Esto no es una ciencia exacta ni una garantía de acierto: el fútbol tiene mucha varianza y un pick bien razonado puede fallar igual que uno mal razonado puede acertar. Por eso existe la página de <a href="historial.html">historial de aciertos</a>, donde se registra cada pick de apuestas hecho en el sitio junto con el resultado real del partido, acierte o falle. Nada se retira ni se "esconde" si sale mal.</p>
 
-    <div class="pick-card">
-      <div class="tag">Lectura del dato</div>
-      <p>El pick de mayor valor es <b>doble oportunidad Atlético o empate</b> a <span class="odds">1.99</span>: el Real Madrid solo ha ganado 3 de sus últimas 10 visitas ligueras al Metropolitano, y el Atlético ganó 3 de los últimos 5 derbis como local. Con Julián Álvarez y Sørloth en duda en el ataque rojiblanco pero Militão, Rodrygo y Mendy también fuera en el lado blanco, una cuota cercana a la par es valor razonable para un derbi de bajas cruzadas.</p>
+      <h2>Qué no es esta web</h2>
+      <p>Fútbol XI no es un servicio de asesoramiento financiero ni de apuestas, no gestiona dinero de nadie y no tiene enlaces de afiliación con casas de apuestas. Si decides apostar, hazlo siempre con límites claros y solo en operadores con licencia en España. +18. Juega con cabeza.</p>
     </div>
-  </section>
-  <section class="fantasy">
-    <div class="eyebrow">Fantasy · Comunio / Biwenger</div>
-    <h2 class="match-title" style="font-size:1.2rem">¿Buscas más picks de fantasy?</h2>
-    <p class="dek">Consulta los diez jugadores más interesantes de toda la Jornada 7 para tu equipo de Comunio/Biwenger.</p>
-    <a class="back-link" href="jornada-7.html#fantasy">Ver los picks de fantasy de la jornada →</a>
-    <br>
-    <a class="back-link" href="jornada-7.html">← Volver a los 10 partidos de la Jornada 7</a>
-    <div class="match-pager"><a href="jornada-7-getafe-malaga.html">← Getafe - Málaga</a><a href="jornada-7-deportivo-betis.html">Deportivo - Real Betis →</a></div>
   </section>
 
   <footer id="sobre">
     <p class="disclaimer"><strong>Sobre esta web:</strong> análisis basado en datos públicos (forma, córners, goles, bajas) para explicar el razonamiento detrás de cada lectura — contenido informativo, no promociona ni enlaza casas de apuestas. Si el juego deja de ser un ocio para ti, Bet365 y otros operadores ofrecen límites de depósito y autoexclusión.</p>
     <p class="disclaimer" style="margin-top:10px">+18. Juega con cabeza.</p>
-    <div class="sources">Datos de la jornada 7 (18–20 de septiembre de 2026), recopilados de fuentes públicas de estadísticas de LaLiga. Algunas cuotas y córners son estimaciones razonadas cuando no había cifra exacta disponible.</div>
-    <div class="sources" style="margin-top:6px"><a href="privacidad.html">Política de privacidad</a></div>
+    <div class="sources"><a href="historial.html">Historial de aciertos</a> · <a href="metodologia.html">Metodología</a> · <a href="privacidad.html">Política de privacidad</a></div>
   </footer>
 </div>
 </body>

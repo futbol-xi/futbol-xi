@@ -74,9 +74,21 @@
   </url>
   <url>
     <loc>https://futbol-xi.github.io/futbol-xi/jornada-6.html</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://futbol-xi.github.io/futbol-xi/historial.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://futbol-xi.github.io/futbol-xi/metodologia.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://futbol-xi.github.io/futbol-xi/privacidad.html</loc>

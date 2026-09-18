@@ -137,6 +137,12 @@
     .fixture{ flex-direction:column; align-items:stretch; text-align:center; }
     .fixture .team.away{ text-align:center; }
   }
+
+  .result-line{ margin-top:14px; padding-top:12px; border-top:1px dashed var(--line); font-size:.88rem; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .result-line .rl-score{ font-family:"IBM Plex Mono", monospace; font-weight:600; color:var(--ink); }
+  .verdict{ font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; font-weight:700; border-radius:6px; padding:3px 9px; }
+  .verdict.hit{ background:var(--accent-soft); color:var(--accent); }
+  .verdict.miss{ background:var(--accent2-soft); color:#B04A3E; }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -150,6 +156,9 @@
       <a href="#analisis">Análisis</a>
       <a href="#fantasy">Fantasy</a>
       <a href="#sobre">Sobre</a>
+    
+      <a href="historial.html">Historial</a>
+      <a href="metodologia.html">Metodología</a>
     </nav>
   </div>
 </header>
@@ -202,6 +211,7 @@
     <div class="pick-card">
       <div class="tag">Lectura del dato</div>
       <p>Combinación con más respaldo estadístico: <b>Betis gana y no encaja</b> — a <span class="odds">2.37</span>, apoyado en las 3 porterías a cero de 5 partidos y el 0 goles fuera del Getafe. El BTTS "No" por separado tiene además su propio respaldo: 9 partidos seguidos del Getafe sin marcar como no favorito.</p>
+      <div class="result-line"><span class="rl-score">Resultado real: Betis 1&ndash;0 Getafe</span><span class="verdict hit">✓ Acierto</span></div>
     </div>
   </section>
 
@@ -231,6 +241,7 @@
     <div class="pick-card">
       <div class="tag">Lectura del dato</div>
       <p>La cuota de <b>empate a 3.75</b> implica un 26.7% de probabilidad, por debajo del 31% histórico del cruce (10 de 32) y de la racha reciente del Málaga en casa. Ahí está el margen. Como pick individual también destaca <b>Nicolás Pépé, más de 3 tiros</b> — promedia 3.1 por partido.</p>
+      <div class="result-line"><span class="rl-score">Resultado real: Málaga 1&ndash;3 Villarreal</span><span class="verdict miss">✗ Fallo</span></div>
     </div>
   </section>
 
@@ -250,7 +261,7 @@
   <footer id="sobre">
     <p class="disclaimer"><strong>Sobre esta web:</strong> análisis basado en datos públicos (forma, córners, goles, bajas) para explicar el razonamiento detrás de cada lectura — contenido informativo, no promociona ni enlaza casas de apuestas. Si el juego deja de ser un ocio para ti, Bet365 y otros operadores ofrecen límites de depósito y autoexclusión.</p>
     <p class="disclaimer" style="margin-top:10px">+18. Juega con cabeza.</p>
-    <div class="sources">Datos de la jornada del 17 de septiembre de 2026, recopilados de fuentes públicas de estadísticas de LaLiga.</div>
+    <div class="sources">Datos de la jornada del 17 de septiembre de 2026, recopilados de fuentes públicas de estadísticas de LaLiga. Resultados verificados tras la disputa de los partidos — ver <a href="historial.html">historial de aciertos completo</a>.</div>
     <div class="sources" style="margin-top:6px"><a href="privacidad.html">Política de privacidad</a></div>
   </footer>
 </div>
